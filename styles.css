@@ -25,7 +25,37 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     cursor: none;
-    animation: lifePulseBg 10s infinite linear;
+    animation: lifePulseBg 15s infinite linear;
+}
+
+@keyframes lifePulseBg {
+
+    0%,
+    100% {
+        background-color: #F9FBFA;
+    }
+
+    50% {
+        background-color: #f2f7f4;
+    }
+}
+
+.life-pulse {
+    animation: lifePulse 8s infinite ease-in-out;
+}
+
+@keyframes lifePulse {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
 }
 
 @keyframes lifePulseBg {
@@ -183,7 +213,50 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(10, 15, 30, 0.4), rgba(10, 15, 30, 0.7));
+    background: linear-gradient(135deg, rgba(10, 15, 30, 0.3) 0%, rgba(10, 15, 30, 0.7) 100%);
+}
+
+.hero-holo-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.holo-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+.holo-ui-left,
+.holo-ui-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    height: 400px;
+    border: 1px solid rgba(34, 211, 238, 0.1);
+    background: rgba(34, 211, 238, 0.02);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    opacity: 0.5;
+}
+
+.holo-ui-left {
+    left: 5%;
+    border-left: 4px solid var(--accent);
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%);
+}
+
+.holo-ui-right {
+    right: 5%;
+    border-right: 4px solid var(--secondary);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%, 0 80%);
 }
 
 .hero-content {
@@ -353,146 +426,45 @@ header {
 
 .pillar-image {
     flex: 1;
-    height: 500px;
-    background: #fdfdfd;
+    height: 600px;
     border-radius: 40px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
 }
 
-/* Scientific Scaffold Visualization */
-.scaffold-viz {
-    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f0f4f2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.scaffold-grid {
-    position: relative;
+.pillar-image img {
     width: 100%;
     height: 100%;
-    perspective: 1000px;
+    object-fit: cover;
+    transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.lattice-layer {
+.pillar-row:hover .pillar-image img {
+    transform: scale(1.05);
+}
+
+.image-overlay-glow {
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(30deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary)),
-        linear-gradient(150deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary)),
-        linear-gradient(30deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary)),
-        linear-gradient(150deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary)),
-        linear-gradient(60deg, rgba(27, 67, 50, 0.1) 25%, transparent 25.5%, transparent 75%, rgba(27, 67, 50, 0.1) 75%, rgba(27, 67, 50, 0.1)),
-        linear-gradient(60deg, rgba(27, 67, 50, 0.1) 25%, transparent 25.5%, transparent 75%, rgba(27, 67, 50, 0.1) 75%, rgba(27, 67, 50, 0.1));
-    background-size: 80px 140px;
-    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
-    opacity: 0.15;
-    animation: scaffoldDrift 30s infinite linear;
-    transform: rotateX(20deg) rotateY(-10deg);
-}
-
-.cell-population {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, var(--secondary) 2px, transparent 0);
-    background-size: 60px 60px;
-    opacity: 0.4;
-    mix-blend-mode: color-burn;
-    filter: blur(1px);
-    animation: cellGrowth 15s infinite ease-in-out;
-}
-
-.tissue-clusters {
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(ellipse at 20% 30%, rgba(255, 183, 3, 0.2) 0%, transparent 40%),
-        radial-gradient(ellipse at 70% 60%, rgba(255, 183, 3, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 40% 80%, rgba(255, 183, 3, 0.1) 0%, transparent 45%);
-    filter: blur(20px);
-    mix-blend-mode: screen;
-    animation: tissueOrganization 20s infinite alternate ease-in-out;
-}
-
-@keyframes tissueOrganization {
-    0% {
-        opacity: 0.3;
-        transform: scale(1);
-    }
-
-    100% {
-        opacity: 0.7;
-        transform: scale(1.2);
-    }
-}
-
-.scaffold-marker {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--primary);
-    font-family: 'Outfit';
-    font-weight: 900;
-    font-size: 10rem;
-    opacity: 0.03;
-    letter-spacing: 20px;
-    pointer-events: none;
-    white-space: nowrap;
-}
-
-.eden-glow-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 183, 3, 0.1) 0%, transparent 50%, rgba(34, 211, 238, 0.05) 100%);
+    background: radial-gradient(circle at center, transparent, rgba(27, 67, 50, 0.2));
     pointer-events: none;
 }
 
-@keyframes scaffoldDrift {
-    from {
-        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
-    }
-
-    to {
-        background-position: 400px 700px, 400px 700px, 440px 770px, 440px 770px, 400px 700px, 440px 770px;
-    }
+.floating-img {
+    animation: floating 6s infinite ease-in-out;
 }
 
-@keyframes cellGrowth {
+@keyframes floating {
 
     0%,
     100% {
-        transform: scale(1) translate(0, 0);
-        opacity: 0.4;
+        transform: translateY(0);
     }
 
     50% {
-        transform: scale(1.1) translate(10px, -10px);
-        opacity: 0.8;
+        transform: translateY(-10px);
     }
-}
-
-.dark-factory-hint {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(10, 15, 30, 0.7), transparent);
-    display: flex;
-    align-items: center;
-    padding-left: 3rem;
-}
-
-.dark-factory-hint::after {
-    content: 'CORE TECH';
-    font-family: 'Outfit';
-    font-size: 3rem;
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.1);
-    letter-spacing: 10px;
 }
 
 .pillar-text {
@@ -595,10 +567,25 @@ header {
     transition: var(--transition);
 }
 
+.stat-item.legacy-land .stat-num {
+    color: #818cf8;
+    text-shadow: 0 0 30px rgba(129, 140, 248, 0.3);
+}
+
+.stat-item.legacy-water .stat-num {
+    color: #34d399;
+    text-shadow: 0 0 30px rgba(52, 211, 153, 0.3);
+}
+
+.stat-item.legacy-life .stat-num {
+    color: #f472b6;
+    text-shadow: 0 0 30px rgba(244, 114, 182, 0.3);
+}
+
 .stat-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--secondary);
-    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-15px);
 }
 
 .stat-box h4 {
@@ -631,11 +618,17 @@ header {
     color: white;
 }
 
-.stat-item p {
-    font-size: 1.1rem;
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+/* Soft Bokeh Transitions */
+.impact-section::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
 }
 
 /* Floating Elements Effect */
