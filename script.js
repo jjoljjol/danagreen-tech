@@ -168,3 +168,19 @@ techCards.forEach((card, index) => {
     card.classList.add('section-reveal');
     revealObserver.observe(card);
 });
+
+// Mobile Menu Toggle
+function toggleMenu() {
+    const nav = document.querySelector('.glass-nav ul');
+    const hamburger = document.getElementById('hamburger');
+    nav.classList.toggle('active');
+    hamburger.classList.toggle('active');
+}
+
+// Close menu on link click
+document.querySelectorAll('.glass-nav ul li a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.glass-nav ul').classList.remove('active');
+        document.getElementById('hamburger').classList.remove('active');
+    });
+});

@@ -148,6 +148,42 @@ header {
     color: var(--primary-light);
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 10px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--text-main);
+    transition: var(--transition);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
 /* Buttons */
 .btn {
     padding: 0.8rem 1.8rem;
@@ -725,6 +761,160 @@ header {
 .contact-form textarea {
     height: 150px;
     resize: none;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .tech-grid,
+    .impact-grid {
+        gap: 2rem;
+    }
+
+    .pillar-row {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        cursor: auto;
+    }
+
+    #custom-cursor {
+        display: none;
+    }
+
+    .glass-nav {
+        max-width: calc(100% - 2rem);
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .glass-nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .glass-nav ul.active {
+        right: 0;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cta-group {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        padding: 0 2rem;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .holo-ui-left,
+    .holo-ui-right {
+        display: none;
+    }
+
+    .section-header h2 {
+        font-size: 2.5rem;
+    }
+
+    .tech-grid,
+    .impact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pillar-row,
+    .pillar-row:nth-child(even) {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .pillar-image {
+        height: 400px;
+        width: 100%;
+    }
+
+    .pillar-text h3 {
+        font-size: 2.2rem;
+    }
+
+    .impact-section {
+        padding: 6rem 0;
+    }
+
+    .impact-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+    }
+
+    .stat-item {
+        padding: 3rem 1.5rem;
+    }
+
+    .stat-item .stat-num {
+        font-size: 3.5rem;
+    }
+
+    .contact-glass {
+        padding: 3rem 2rem;
+        flex-direction: column;
+        gap: 4rem;
+        border-radius: 40px;
+    }
+
+    .contact-info h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (pointer: coarse) {
+    body {
+        cursor: auto;
+    }
+
+    #custom-cursor {
+        display: none;
+    }
 }
 
 /* Revealed Sections */
